@@ -1,5 +1,5 @@
 ﻿using System;
-
+//Strategy Pattern : that we divide the behavior into small classes 
 public interface IFlyBehavior
 {
     void Fly();
@@ -51,6 +51,7 @@ public abstract class Duck
     {
         quackBehavior.Quack();
     }
+    //ONE of the benefit in Strategy pattern that we can change te behavior in Run time
     public void SetFlyBehavior(IFlyBehavior behavior)
     {
         flyBehavior = behavior;
@@ -85,6 +86,7 @@ public class program
 {
     public static void Main(string[] args)
     {
+        //Obj Type Duck but the rael one is MallardDuck
         Duck mallard = new MallardDuck();
         mallard.Display();
         mallard.PerformFly();
