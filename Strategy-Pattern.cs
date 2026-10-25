@@ -18,6 +18,12 @@ public class FlyNoWay : IFlyBehavior
         Console.WriteLine("I can't fly.");
     }
 }
+class FlyRocketPowered : IFlyBehavior
+{
+    public void Fly()
+{
+   Console.WriteLine("Flying with a rocket!");
+}}
 public interface IQuackBehavior
 {
     void Quack();
@@ -82,6 +88,17 @@ public class MallardDuck : Duck
         Console.WriteLine("I am a Mallard Duck.");
     }
 }
+public class ModelDuck: Duck
+{
+    public ModelDuck()
+    {
+        flyBehavior = new FlyNoWay();
+        quackBehavior = new NormalQuack();
+    }
+    public override void Display() {
+        Console.WriteLine("I am A Model Duck!");
+    } 
+}
 public class program
 {
     public static void Main(string[] args)
@@ -97,5 +114,14 @@ public class program
         Console.WriteLine("After changing behaviors:");
         mallard.PerformFly();
         mallard.PerformQuack();
+         Console.WriteLine("---------------------------------------");
+  Duck model = new ModelDuck();
+
+  model.Display();
+         
+  // Change behavior at runtime
+  model.SetFlyBehavior(new FlyRocketPowered());
+
+  model.PerformFly();
     }
 }
