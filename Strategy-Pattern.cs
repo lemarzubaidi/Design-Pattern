@@ -46,8 +46,13 @@ public class Squeak : IQuackBehavior
 }
 public abstract class Duck
 {
-    public IFlyBehavior flyBehavior;
-   public  IQuackBehavior quackBehavior;
+    private IFlyBehavior flyBehavior;
+   private  IQuackBehavior quackBehavior;
+     protected Duck(IFlyBehavior Fly,IQuackBehavior Quack)
+ {
+     flyBehavior = Fly;
+     quackBehavior = Quack;
+ }
     public void PerformFly()
     {
         flyBehavior.Fly();
@@ -77,10 +82,8 @@ public abstract class Duck
 
 public class MallardDuck : Duck
 {
-    public MallardDuck()
+    public MallardDuck():base(new FlyWithWings(), new NormalQuack())
     {
-        flyBehavior = new FlyWithWings();
-        quackBehavior = new NormalQuack();
     }
 
     public override void Display()
@@ -90,10 +93,9 @@ public class MallardDuck : Duck
 }
 public class ModelDuck: Duck
 {
-    public ModelDuck()
+    public ModelDuck():base(new FlyNoWay(), new NormalQuack())
     {
-        flyBehavior = new FlyNoWay();
-        quackBehavior = new NormalQuack();
+        
     }
     public override void Display() {
         Console.WriteLine("I am A Model Duck!");
